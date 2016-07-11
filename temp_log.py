@@ -19,12 +19,12 @@ def db_connect():
 #Get a list of the currently connected thermomters
 def get_devices():
     # search for a device file that starts with 28
-    devicelist = glob.glob('/sys/bus/w1/devices/28*')
-    if devicelist=='':
+    sensorlist = glob.glob('/sys/bus/w1/devices/28*')
+    if sensorlist=='':
         return None
     else:
         # append /w1slave to the device file
-        w1devicefile = devicelist[0] + '/w1_slave'
+        w1devicefile = sensorlist[0] + '/w1_slave'
 
 
 #store the temperature in the database
@@ -52,37 +52,21 @@ def display_data():
     conn.close()
 
 
-# get temerature
-# returns None on error, or the temperature as a float
-def get_temp(devicefile):
+# returns None on error, or the temperature in C as a float
+def get_temp(sensor_list):
+  try:
+    sensors = open(sensor_list, 'r')
+    lines = sensors.readlines()
+    sensors.close()
+ except:
+     return None
 
-    try:
-        fileobj = open(devicefile,'r')
-        lines = fileobj.readlines()
-        fileobj.close()
-    except:
-        return None
+    temp_output = lines[1].find('t=')
 
-    # get the status from the end of line 1
-    status = lines[0][-4:-1]
-
-    # is the status is ok, get the temperature from line 2
-    if status=="YES":
-        temp_output = lines[1].find('t=')
-        if temp_output != -1:
-            temp_str = lines[1].strip()[temp_output+2:]
-            temp_c = float(temp_str)/1000.0
-        return round(temp_c,4)
-
-
-        print status
-        tempstr= lines[1][-6:-1]
-        tempvalue=float(tempstr)/1000
-        print tempvalue
-        return tempvalue
-    else:
-        print "There was an error."
-        return None
+    if temp_output != -1:
+        temp_string = lines[1].strip()[temp_output+2:]
+        temp_c = float(temp_string)/1000.0
+    return round(temp_c,5)
 
 
 
@@ -111,7 +95,6 @@ while True:
         # Sometimes reads fail on the first attempt
         # so we need to retry
         temperature = get_temp(sensors)
-        print "temperature="+str(temperature)
 
         # Store the temperature in the database
     log_temperature(temperature)
