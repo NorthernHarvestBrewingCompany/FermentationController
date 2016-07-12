@@ -100,8 +100,7 @@ while True:
     log_temperature(temperature)
         # display the contents of the database
         # display_data()
-
-        time.sleep(60)
+    time.sleep(60)
 
 
 if __name__=="__main__":
