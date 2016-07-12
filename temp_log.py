@@ -54,12 +54,12 @@ def display_data():
 
 # returns None on error, or the temperature in C as a float
 def get_temp(sensor_list):
-  try:
-    sensors = open(sensor_list, 'r')
-    lines = sensors.readlines()
-    sensors.close()
- except:
-     return None
+    try:
+        sensors = open(sensor_list, 'r')
+        lines = sensors.readlines()
+        sensors.close()
+    except:
+        return None
 
     temp_output = lines[1].find('t=')
 
