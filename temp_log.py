@@ -88,17 +88,18 @@ def main():
     db_connect()
 
     #get a list of currently connected sensors
-    sensors = get_devices()
+    sensor_list = get_devices()
 
 while True:
     # get the temperature from the device file
-    temperature = get_temp(sensors)
+    temperature = get_temp(sensor_list)
+
     if temperature != None:
         print "temperature="+str(temperature)
     else:
         # Sometimes reads fail on the first attempt
         # so we need to retry
-        temperature = get_temp(sensors)
+        temperature = get_temp(sensor_list)
 
         # Store the temperature in the database
     log_temperature(temperature)
