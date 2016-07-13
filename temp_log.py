@@ -20,11 +20,15 @@ def db_connect():
 def get_devices():
     # search for a device file that starts with 28
     sensorlist = glob.glob('/sys/bus/w1/devices/28*')
+
     if sensorlist=='':
+        print "ERROR: No Sensors Found"
         return None
     else:
         # append /w1slave to the device file
-        w1devicefile = sensorlist[0] + '/w1_slave'
+        for serialnum in sensorlist:
+            print sensornum
+            w1devicefile = sensornum + '/w1_slave'
 
 
 #store the temperature in the database
