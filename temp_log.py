@@ -89,7 +89,6 @@ def main():
 
     #get a list of currently connected sensors
     sensor_list = get_devices()
-    pint sensor_list
 
 while True:
     # get the temperature from the device file
