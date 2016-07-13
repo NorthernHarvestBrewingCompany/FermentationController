@@ -89,23 +89,24 @@ def main():
 
     #get a list of currently connected sensors
     sensor_list = get_devices()
+    pint sensor_list
 
-while True:
-    # get the temperature from the device file
-    temperature = get_temp(sensor_list)
-
-    if temperature != None:
-        print "temperature="+str(temperature)
-    else:
-        # Sometimes reads fail on the first attempt
-        # so we need to retry
+    while True:
+        # get the temperature from the device file
         temperature = get_temp(sensor_list)
 
-        # Store the temperature in the database
-    log_temperature(temperature)
-        # display the contents of the database
-        # display_data()
-    time.sleep(60)
+        if temperature != None:
+            print "temperature="+str(temperature)
+        else:
+            # Sometimes reads fail on the first attempt
+            # so we need to retry
+            temperature = get_temp(sensor_list)
+
+            # Store the temperature in the database
+        log_temperature(temperature)
+            # display the contents of the database
+            # display_data()
+        time.sleep(60)
 
 
 if __name__=="__main__":
