@@ -25,8 +25,8 @@ def get_devices():
     else:
         # append /w1slave to the device file
         for serialnum in sensorlist:
-            print sensornum
-            w1devicefile = sensornum + '/w1_slave'
+            print serialnum
+            w1devicefile = serialnum + '/w1_slave'
 
 
 #store the temperature in the database
