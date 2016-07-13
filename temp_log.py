@@ -7,7 +7,7 @@ import MySQLdb
 from time import strftime
 
 #connect to the database
-db_host="localhost"
+db_host="127.0.0.1"
 db_user="root"
 db_pass="password"
 db_name='temp_db'
@@ -25,7 +25,7 @@ def get_devices():
     else:
         # append /w1slave to the device file
         for serialnum in sensorlist:
-            print serialnum
+            print "Loaded " + serialnum
             w1devicefile = serialnum + '/w1_slave'
 
 
@@ -33,7 +33,7 @@ def get_devices():
 def log_temperature(temp):
     db = MySQLdb.connect(host=db_host, user=db_user,passwd=db_pass, db=db_name)
     cur = db.cursor()
-    
+
     datetimeWrite = (time.strftime("%Y-%m-%d ") + time.strftime("%H:%M:%S"))
     sql = ("""INSERT INTO tempLog (datetime,temperature) VALUES (%s,%s)""",(datetimeWrite,temp))
     try:
