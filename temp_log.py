@@ -31,6 +31,9 @@ def get_devices():
 
 #store the temperature in the database
 def log_temperature(temp):
+    db = MySQLdb.connect(host=db_host, user=db_user,passwd=db_pass, db=db_name)
+    cur = db.cursor()
+    
     datetimeWrite = (time.strftime("%Y-%m-%d ") + time.strftime("%H:%M:%S"))
     sql = ("""INSERT INTO tempLog (datetime,temperature) VALUES (%s,%s)""",(datetimeWrite,temp))
     try:
