@@ -46,7 +46,7 @@ def log_temperature(temp):
 
 # display the contents of the database
 def display_data():
-    db = MySQLdb.connect(host=db_host, user=db_user,passwd=db_password, db=db_name)
+    db = MySQLdb.connect(host=db_host, user=db_user,passwd=db_pass, db=db_name)
     cur = db.cursor()
 
     for row in curs.execute("SELECT * FROM temps"):
@@ -84,7 +84,7 @@ def main():
     #Connect to the MySQL database for use inside the loops
     #function calls, the connection is not closed by the functions
     #directly and will need to be closed when the loop breaks
-    db = MySQLdb.connect(host=db_host, user=db_user,passwd=db_password, db=db_name)
+    db = MySQLdb.connect(host=db_host, user=db_user,passwd=db_pass, db=db_name)
     cur = db.cursor()
 
     #get a list of currently connected sensors
