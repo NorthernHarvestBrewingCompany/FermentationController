@@ -15,6 +15,7 @@ and setup your mySQL database as defined in the script.
 Edit the /boot/config.txt file and add dtoverlay=w1-gpio
 
 sudo nano /boot/config.txt
+
 dtoverlay=w1-gpio
 
 ## Work in progress plans
