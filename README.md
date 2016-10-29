@@ -11,6 +11,10 @@ and setup your mySQL database as defined in the script.
 
 [Building an SQLite temperature logger](http://raspberrywebserver.com/cgiscripting/rpi-temperature-logger/building-an-sqlite-temperature-logger.html)
 
+## RPi Setup
+Edit the /boot/config.txt file and add dtoverlay=w1-gpio
+*sudo nano /boot/config.txt
+*dtoverlay=w1-gpio
 
 ## Work in progress plans
 - MQTT to publish temprature data to AWS IoT in real-time
